@@ -97,7 +97,15 @@ public class Question extends AppCompatActivity {
     {
         ar.add(s);
         Log.i("addqueation","is "+ar.get(0));
-
+        Log.i("addqueation","is "+ar.get(1));
+        Log.i("addqueation","is "+ar.get(2));
+        Log.i("addqueation","is "+ar.get(3));
+        Log.i("addqueation","is "+ar.get(4));
+        Log.i("addqueation","is "+ar.get(5));
+        Log.i("addqueation","is "+ar.get(6));
+        Log.i("addqueation","is "+ar.get(7));
+        Log.i("addqueation","is "+ar.get(8));
+        Log.i("addqueation","is "+ar.get(9));
     }
     public void showquestion()
     {
