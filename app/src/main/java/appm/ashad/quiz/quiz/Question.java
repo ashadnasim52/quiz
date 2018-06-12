@@ -94,6 +94,7 @@ public class Question extends AppCompatActivity {
     }
     public void showquestion()
     {
+        Log.i("arrayofquesstiion","is "+arrayofquesstion);
         question.setText(arrayofquesstion.get(0));
 
     }
@@ -132,7 +133,9 @@ public class Question extends AppCompatActivity {
 
 
 
+
                         }
+                        showquestion();
 
 //                        while(i<=array.length())
 //                        {
@@ -143,8 +146,6 @@ public class Question extends AppCompatActivity {
 ////                            Log.i("arrary","of "+arrayofquesstion);
 //
 //                        }
-                        Log.i("arrayofquesstiion","is "+arrayofquesstion);
-                        showquestion();
 
 
 
@@ -154,11 +155,14 @@ public class Question extends AppCompatActivity {
 
 
                     }
+
                   else
                     {
 
                         Toast.makeText(getApplicationContext(),"SOMETHING WENTS WRONG",Toast.LENGTH_SHORT).show();
                     }
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
