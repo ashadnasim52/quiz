@@ -19,12 +19,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class Question extends AppCompatActivity {
     TextView question,score,noofquest,timee;
     RadioButton radioButton1,radioButton2,radioButton3,radioButton4;
     Button button;
     ProgressBar progressBar;
     int i=0;
+
+    ArrayList<String> arrayofquesstion=new ArrayList<String>();
+
+
 
     String myurl="https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple";
     //https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple
@@ -86,8 +92,14 @@ public class Question extends AppCompatActivity {
         timee.setVisibility(View.VISIBLE);
 
     }
+    public void showquestion()
+    {
+        question.setText(arrayofquesstion.get(0));
+
+    }
     public void nextquestion()
     {
+
 
 
     }
@@ -110,25 +122,29 @@ public class Question extends AppCompatActivity {
 
                         JSONArray array=response.getJSONArray("results");
                         Log.i("array","is"+array);
-//                        for (int i=0;i<=array.length())
-//                        {
-//                            JSONObject question1=array.getJSONObject(i);
-//                            Log.i("question1","is "+question1);
-//                            String hereyourquestion=question1.get("question").toString();
-//                            question.setText(hereyourquestion);
-//
-//
-//                        }
-
-                        while(i<=array.length())
+                        for (int i=0;i<=array.length();i++)
                         {
                             JSONObject question1=array.getJSONObject(i);
                             Log.i("question1","is "+question1);
+
                             String hereyourquestion=question1.get("question").toString();
-                            question.setText(hereyourquestion);
-                            i++;
+                            arrayofquesstion.add(i,hereyourquestion);
+
+
 
                         }
+
+//                        while(i<=array.length())
+//                        {
+//                            JSONObject question1=array.getJSONObject(i);
+////                            Log.i("question1","is "+question1);
+//                            String hereyourquestion=question1.get("question").toString();
+//                            i++;
+////                            Log.i("arrary","of "+arrayofquesstion);
+//
+//                        }
+                        Log.i("arrayofquesstiion","is "+arrayofquesstion);
+                        showquestion();
 
 
 
