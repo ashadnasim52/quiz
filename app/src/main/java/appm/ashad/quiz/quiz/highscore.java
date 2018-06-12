@@ -9,15 +9,18 @@ import android.view.View;
 public class highscore extends AppCompatActivity {
 
     CardView start;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_highscore);
-        start=findViewById(R.id.cardView2);
+
+        start = findViewById(R.id.cardView2);
+
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(getApplicationContext(),Question.class);
+                Intent i = new Intent(getApplicationContext(),Question.class);
                 startActivity(i);
             }
         });
