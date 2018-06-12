@@ -27,8 +27,9 @@ public class Question extends AppCompatActivity {
     Button button;
     ProgressBar progressBar;
     int i=0;
+    ArrayList<String> ar=new ArrayList<String>();
 
-    ArrayList<String> arrayofquesstion=new ArrayList<String>();
+
 
 
 
@@ -92,11 +93,14 @@ public class Question extends AppCompatActivity {
         timee.setVisibility(View.VISIBLE);
 
     }
+    public void addquestion(String s)
+    {
+        ar.add(s);
+        Log.i("addqueation","is "+ar.get(0));
+
+    }
     public void showquestion()
     {
-        Log.i("arrayofquesstiion","is "+arrayofquesstion);
-        question.setText(arrayofquesstion.get(0));
-
     }
     public void nextquestion()
     {
@@ -125,17 +129,19 @@ public class Question extends AppCompatActivity {
                         Log.i("array","is"+array);
                         for (int i=0;i<=array.length();i++)
                         {
-                            JSONObject question1=array.getJSONObject(i);
-                            Log.i("question1","is "+question1);
+                            JSONObject questions=array.getJSONObject(i);
+                            Log.i("question1","is "+questions);
 
-                            String hereyourquestion=question1.get("question").toString();
-                            arrayofquesstion.add(i,hereyourquestion);
+                            String hereyourquestion=questions.get("question").toString();
+                            Log.i("here is","your quesstion"+hereyourquestion);
+                            addquestion(hereyourquestion);
+
+
 
 
 
 
                         }
-                        showquestion();
 
 //                        while(i<=array.length())
 //                        {
