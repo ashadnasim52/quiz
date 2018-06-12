@@ -65,7 +65,6 @@ public class Question extends AppCompatActivity {
     }
     public void showprogressbar()
     {
-
         Log.i("progre","showing");
         progressBar.setVisibility(View.VISIBLE);
         question.setVisibility(View.INVISIBLE);
@@ -94,12 +93,12 @@ public class Question extends AppCompatActivity {
         timee.setVisibility(View.VISIBLE);
 
     }
-//    public void addquestion(String s)
-//    {
-//        ar.add(s);
-//        Log.i("addqueation","is "+ ar.get(0));
-//
-//    }
+    public void addquestion(String s)
+    {
+        ar.add(s);
+        Log.i("addqueation","is "+ar.get(0));
+
+    }
     public void showquestion()
     {
     }
@@ -128,27 +127,16 @@ public class Question extends AppCompatActivity {
 
                         JSONArray array=response.getJSONArray("results");
                         Log.i("array","is"+array);
-                        for (int i=0; i<=array.length(); i++)
+                        for (int i=0;i<=array.length();i++)
                         {
-                            JSONObject questions = array.getJSONObject(i);
-                            Log.i("question1","is "+ questions);
+                            JSONObject questions=array.getJSONObject(i);
+                            Log.i("question1","is "+questions);
 
-                            String hereyourquestion = questions.get("question").toString();
-                            Log.i("here is","your quesstion"+ hereyourquestion);
+                            String hereyourquestion=questions.get("question").toString();
+                            Log.i("here is","your quesstion"+hereyourquestion);
+                            addquestion(hereyourquestion);
 
-                            question.setText(hereyourquestion);
 
-                            JSONArray WrongAnsArray = response.getJSONArray("incorrect_answers");
-
-                            for (int i1 =0; i1 <= WrongAnsArray.length(); i1++ ){
-
-                                JSONObject WrongAns = WrongAnsArray.getJSONObject(i1);
-
-                                String WrongAns1 = WrongAnsArray.getJSONArray(Integer.parseInt("0")).toString();
-
-                                Log.i("wrong ", "1 " + WrongAns1);
-                                radioButton1.setText(WrongAns1);
-                            }
 
 
 
@@ -175,7 +163,7 @@ public class Question extends AppCompatActivity {
 
                     }
 
-                  else
+                    else
                     {
 
                         Toast.makeText(getApplicationContext(),"SOMETHING WENTS WRONG",Toast.LENGTH_SHORT).show();
