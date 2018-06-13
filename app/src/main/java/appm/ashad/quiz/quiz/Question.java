@@ -2,6 +2,7 @@ package appm.ashad.quiz.quiz;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Question extends AppCompatActivity {
     TextView question,score,noofquest,timee;
@@ -27,7 +29,13 @@ public class Question extends AppCompatActivity {
     Button button;
     ProgressBar progressBar;
     int i=0;
-    ArrayList<String> ar=new ArrayList<String>();
+    String array,option1,option2,option3,writeanswerarray;
+
+    ArrayList ar=new ArrayList(Arrays.asList(array));
+    ArrayList optionone=new ArrayList(Arrays.asList(option1));
+    ArrayList optiontwo=new ArrayList(Arrays.asList(option2));
+    ArrayList optionthree=new ArrayList(Arrays.asList(option3));
+    ArrayList writeanswer=new ArrayList(Arrays.asList(writeanswerarray));
 
 
 
@@ -36,6 +44,13 @@ public class Question extends AppCompatActivity {
     String myurl="https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple";
     //https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        askquestion();
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +66,23 @@ public class Question extends AppCompatActivity {
         noofquest=findViewById(R.id.noofquestion);
         timee=findViewById(R.id.time);
         progressBar=findViewById(R.id.progressBar2);
+        Log.i("arrayfromoutside","is"+ar);
+        Log.i("arrayfromoutside","is"+optionone);
+        Log.i("arrayfromoutside","is"+optiontwo);
+        Log.i("arrayfromoutside","is"+optionthree);
+        Log.i("arrayfromoutside","is"+writeanswer);
+        // answerList = new ArrayList<Answer>();
 
-        askquestion();
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nextquestion();
+                Log.i("onclick","clicked");
+                showquestion();
 
             }
         });
+
 
 
     }
@@ -95,20 +118,14 @@ public class Question extends AppCompatActivity {
     }
     public void addquestion(String s)
     {
-        ar.add(s);
-        Log.i("addqueation","is "+ar.get(0));
-        Log.i("addqueation","is "+ar.get(1));
-        Log.i("addqueation","is "+ar.get(2));
-        Log.i("addqueation","is "+ar.get(3));
-        Log.i("addqueation","is "+ar.get(4));
-        Log.i("addqueation","is "+ar.get(5));
-        Log.i("addqueation","is "+ar.get(6));
-        Log.i("addqueation","is "+ar.get(7));
-        Log.i("addqueation","is "+ar.get(8));
-        Log.i("addqueation","is "+ar.get(9));
+
     }
+
+
     public void showquestion()
     {
+
+        question.setText(ar.get(0).toString());
     }
     public void nextquestion()
     {
@@ -135,14 +152,35 @@ public class Question extends AppCompatActivity {
 
                         JSONArray array=response.getJSONArray("results");
                         Log.i("array","is"+array);
-                        for (int i=0;i<=array.length();i++)
+                        for (int i=0;i<array.length();i++)
                         {
                             JSONObject questions=array.getJSONObject(i);
                             Log.i("question1","is "+questions);
 
-                            String hereyourquestion=questions.get("question").toString();
+                            String hereyourquestion=questions.getString("question");
                             Log.i("here is","your quesstion"+hereyourquestion);
                             addquestion(hereyourquestion);
+                            ar.add(i,hereyourquestion);
+                            Log.i("ar","is "+ar);
+                            String hereyourcorrectanswer=questions.getString("correct_answer");
+                            writeanswer.add(i,hereyourcorrectanswer);
+                            JSONArray arrayofanswer=questions.getJSONArray("incorrect_answers");
+                            Log.i("json array","of inccorrect answer"+arrayofanswer);
+                            for (int j=0;j<arrayofanswer.length();j++)
+                            {
+                                JSONObject nw=arrayofanswer.getJSONObject(j);
+                                String incorectanswerfirst=nw.getString("0");
+                                optionone.add(j,incorectanswerfirst);
+                                String incorrectanswersecond=nw.getString("1");
+                                optiontwo.add(j,incorrectanswersecond);
+                                String incorrectanswerthird=nw.getString("2");
+                                optionthree.add(j,incorrectanswerthird);
+
+
+
+                            }
+
+
 
 
 
@@ -151,6 +189,7 @@ public class Question extends AppCompatActivity {
 
 
                         }
+                        radioButton2.setText("asssadasd");
 
 //                        while(i<=array.length())
 //                        {
